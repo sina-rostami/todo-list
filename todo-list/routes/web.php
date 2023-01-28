@@ -14,8 +14,12 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/signup', function () {
     return view('user.create');
+});
+
+Route::get('/login', function () {
+    return view('login');
 });
 
 Route::resource('user', UserController::class);

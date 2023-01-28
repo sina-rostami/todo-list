@@ -15,7 +15,7 @@
         <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" />
     </div>
     <div class="form-floating">
-        <a href="./register.html">Not a member? Register Now!</a>
+        <a href="{{ url('signup') }}">Not a member? Register Now!</a>
     </div>
     <div class="form-floating">
         <button class="w-100 btn btn-lg btn-primary mt-2" type="submit">Sign in</button>

@@ -24,16 +24,15 @@ body {
   z-index: 2;
 }
 
-.form-signin input[type="email"] {
+.form-signin label {
+  color: gray;
+}
+
+.form-signin input {
   margin-bottom: 15px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
-}
-
-.form-signin input[type="password"] {
-  margin-bottom: 15px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+  border-radius: 15px;
 }
 
 .bd-placeholder-img {
@@ -93,4 +92,10 @@ body {
   padding: 24px;
   border-radius: 16px;
   border: 1px solid;
+}
+
+form .form-error {
+  font-size: .75rem;
+  color: red;
+  font-weight: bold;
 }

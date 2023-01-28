@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Crypt;
 
 class UserController extends Controller
 {
@@ -34,7 +36,23 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'confirm-password' => 'required',
+        ]);
+
+        if ($validated['password'] != $validated['confirm-password'])
+        {
+            abort(400);
+        }
+
+        $user = New User;
+        $user->email = $validated['email'];
+        $user->name = $validated['name'];
+        $user->password = Crypt::encrypt($validated['password']);
+        $user->save();
 
         return view("login");
     }
