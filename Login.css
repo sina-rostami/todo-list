@@ -1,42 +1,38 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  background-size: cover;
-  /* height: 100%; */
-}
-body{
-  /* background-color: black; */
-  margin: 0;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  
-}
-.container{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-.container img{
-  /* width: 100px; */
+html,
+body {
   height: 100%;
 }
-/* .container .btn{
-  background-color: white;
-  color: black;
-  font-size: 27px;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-  border-radius: 7px;
+
+body {
+  display: flex;
   align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background: url("./assets/background_login.png") no-repeat;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-.container .btn:hover {
-  background-color: red;
-} */
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: auto 5%;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
