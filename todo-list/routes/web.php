@@ -22,4 +22,7 @@ Route::get('/login', function () {
     return view('login');
 });
 
+Route::post('/login', [UserController::class, 'login'])->name('user.login');
+
 Route::resource('user', UserController::class);
+Route::resource('task', UserController::class);

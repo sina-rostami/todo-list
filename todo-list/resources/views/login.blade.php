@@ -3,16 +3,17 @@
 @section('title', 'Login')
 
 @section('content')
-<form method="POST" action="">
+<form method="POST" action="{{ route('user.login') }}">
+    @csrf
     <h1 class="h3 mb-3 fw-normal">Login</h1>
 
     <div class="form-floating">
-        <label for="floatingInput">Email Address</label>
-        <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com"/>
+        <label for="email">Email Address</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com"/>
     </div>
     <div class="form-floating">
-        <label for="floatingPassword">Password</label>
-        <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" />
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Password" />
     </div>
     <div class="form-floating">
         <a href="{{ url('signup') }}">Not a member? Register Now!</a>

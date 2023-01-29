@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Support\Facades\Crypt;
+use App\Models\Task;
 
-class UserController extends Controller
+class TaskController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return 'hello';
+        // return view('task.index', [
+        //     'tasks' => Task::all()
+        // ]);
     }
 
     /**
@@ -25,7 +27,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user.create');
+        //
     }
 
     /**
@@ -36,25 +38,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-            'confirm-password' => 'required',
-        ]);
-
-        if ($validated['password'] != $validated['confirm-password'])
-        {
-            abort(400);
-        }
-
-        $user = New User;
-        $user->email = $validated['email'];
-        $user->name = $validated['name'];
-        $user->password = Crypt::encrypt($validated['password']);
-        $user->save();
-
-        return view("login");
+        //
     }
 
     /**
@@ -100,22 +84,5 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-
-    public function login(Request $request)
-    {
-        $validated = $request->validate([
-            'email' => 'required',
-            'password' => 'required',
-        ]);
-
-        $user = User::where('email', $validated['email'])->get()[0];
-        if (Crypt::decrypt($user['password']) == $validated['password'])
-        {
-            $request->session()->put('user', $user['name']);
-            return  redirect()->route('task.index');
-        }
-        // return $user;
     }
 }
