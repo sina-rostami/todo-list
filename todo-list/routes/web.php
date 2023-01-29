@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +26,6 @@ Route::get('/login', function () {
 Route::post('/login', [UserController::class, 'login'])->name('user.login');
 
 Route::resource('user', UserController::class);
-Route::resource('task', UserController::class);
+Route::resource('task', TaskController::class);
+Route::put('/task/done/{task}', [TaskController::class, 'done'])->name('task.done');
+

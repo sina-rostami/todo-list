@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('title');
-            $table->timestampTz('start_time', $precision = 0)->nullable();
-            $table->timestampTz('end_time', $precision = 0)->nullable();
+            $table->string('start_time', $precision = 0)->nullable();
+            $table->string('end_time', $precision = 0)->nullable();
             $table->boolean('is_done');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
