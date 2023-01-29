@@ -6,6 +6,15 @@
     <link href="{{ url('css/task.css') }}" rel="stylesheet" />
 @endsection
 
+@section('message')
+<?php
+if (isset($message))
+{
+    echo "<script>alert(\"" . $message . "\")</script>";
+}
+?>
+@endsection
+
 @section('content')
 @if (count($tasks) > 0)
     @foreach($tasks as $task)

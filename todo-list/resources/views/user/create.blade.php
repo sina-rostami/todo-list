@@ -9,14 +9,14 @@
 
     <div class="form-floating">
         <label for="name">Name</label>
-        <input type="name" class="form-control" id="name" name="name" placeholder="name@example.com" />
+        <input type="name" class="form-control" id="name" name="name" value="{{ old('name') }}" />
         @error('name')
             <div class="form-error">{{ $message }}</div>
         @enderror
     </div>
     <div class="form-floating">
         <label for="email">Email Address</label>
-        <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" />
+        <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" />
         @error('email')
             <div class="form-error">{{ $message }}</div>
         @enderror

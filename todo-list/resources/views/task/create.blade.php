@@ -2,6 +2,15 @@
 
 @section('title', 'Create Task')
 
+@section('message')
+<?php
+if (isset($message))
+{
+    echo "<script>alert(\"" . $message . "\")</script>";
+}
+?>
+@endsection
+
 @section('content')
 <form method="POST" action="{{ route('task.store') }}">
     @csrf

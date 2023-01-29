@@ -27,9 +27,11 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('task.create');
+        return view('task.create', [
+            'request' => $request,
+        ]);
     }
 
     /**
@@ -48,8 +50,10 @@ class TaskController extends Controller
 
         if (date($validated['start_time']) >= date($validated['end_time']))
         {
-            // abort(400);
-            return "times wrong";
+            return view('task.create', [
+                'request' => $request,
+                'message' => 'Times are wrong',
+            ]);
         }
 
         $task = New Task;
@@ -80,9 +84,10 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         return view("task.edit", [
+            'request' => $request,
             'task' => Task::findOrFail($id)
         ]);
     }
@@ -103,13 +108,24 @@ class TaskController extends Controller
             'is_done' => 'nullable',
         ]);
 
+        if (date($validated['start_time']) >= date($validated['end_time']))
+        {
+            return view('task.edit', [
+                'request' => $request,
+                'task' => Task::findOrFail($id),
+                'message' => 'Times are wrong',
+            ]);
+        }
+
         $validated['is_done'] = (isset($validated['is_done']) && $validated['is_done'] == "on") ? true : false;
 
         $task = Task::findOrFail($id);
 
         if ($task->user_id != $request->session()->get('user_id'))
         {
-            return "Access denied.";
+            return view('user.login', [
+                'message' => 'Access denied',
+            ]);
         }
 
         $task->title = $validated['title'];
@@ -134,7 +150,9 @@ class TaskController extends Controller
 
         if ($task->user_id != $request->session()->get('user_id'))
         {
-            return "Access denied.";
+            return view('user.login', [
+                'message' => 'Access denied',
+            ]);
         }
 
         $task->is_done = true;

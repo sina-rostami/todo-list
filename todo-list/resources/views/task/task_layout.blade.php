@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ url('css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ url('css/task.css') }}" rel="stylesheet" />
+    <link href="{{ url('css/site.css') }}" rel="stylesheet" />
     <title>@yield('title')</title>
     @yield('in_head')
 </head>
@@ -21,7 +22,7 @@
         </ul>
         </span>
         <span class="navbar-text" style="display: flex">
-            <a class="nav-link" href="#">Profile</a>
+            <a class="nav-link" href="{{ route('user.edit', ['request' => $request, 'user' => $request->session()->get('user_id')]) }}">Profile</a>
             <a href="{{ route('user.logout') }}" class="btn btn-primary">Logout</a>
         </span>
     </div>
@@ -29,5 +30,6 @@
     <div id="content" class="content">
         @yield('content')
     </div>
+    @yield('message')
 </body>
 </html>

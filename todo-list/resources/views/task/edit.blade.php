@@ -5,6 +5,15 @@
     <link href="{{ url('css/edit.css') }}" rel="stylesheet" />
 @endsection
 
+@section('message')
+<?php
+if (isset($message))
+{
+    echo "<script>alert(\"" . $message . "\")</script>";
+}
+?>
+@endsection
+
 @section('content')
 <form method="POST" action="{{ route('task.update', ['task' => $task->id]) }}">
     @csrf
