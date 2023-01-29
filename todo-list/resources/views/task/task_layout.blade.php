@@ -15,14 +15,14 @@
         <a class="navbar-brand" href="#">To do list</a>
         <ul class="navbar-nav " style="margin-right:auto">
         <li class="nav-item active"style="display:flex; align-items:center">
-            <a class="nav-link" href="{{ url('task') }}">Tasks<span class="sr-only"></a>
-            <a class="nav-link" href="{{ url('task/create') }}"><button class="btn btn-primary">New task</button><span class="sr-only"></a>    
+            <a class="nav-link" href="{{ route('task.index') }}">Tasks<span class="sr-only"></a>
+            <a class="nav-link" href="{{ route('task.create') }}"><button class="btn btn-primary">New task</button><span class="sr-only"></a>    
         </li>
         </ul>
-        </span>     
+        </span>
         <span class="navbar-text" style="display: flex">
             <a class="nav-link" href="#">Profile</a>
-            <button class="btn btn-primary">Logout</button>  
+            <a href="{{ route('user.logout') }}" class="btn btn-primary">Logout</a>
         </span>
     </div>
     </nav>

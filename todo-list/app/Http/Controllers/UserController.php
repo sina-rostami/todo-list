@@ -53,7 +53,9 @@ class UserController extends Controller
         $user->name = $validated['name'];
         $user->password = Crypt::encrypt($validated['password']);
         $user->save();
+        $request->session()->put('user_id', $request['id']);
 
+        // redirect to his/her tasks page
         return view("login");
     }
 
@@ -102,7 +104,6 @@ class UserController extends Controller
         //
     }
 
-
     public function login(Request $request)
     {
         $validated = $request->validate([
@@ -113,9 +114,16 @@ class UserController extends Controller
         $user = User::where('email', $validated['email'])->get()[0];
         if (Crypt::decrypt($user['password']) == $validated['password'])
         {
-            $request->session()->put('user', $user['name']);
-            return  redirect()->route('task.index');
+            $request->session()->put('user_id', strval($user['id']));
+            return redirect()->route('task.index');
         }
-        // return $user;
+        // go to login with an alert
+        return "wrong password";
+    }
+
+    public function logout(Request $request)
+    {
+        $request->session()->put('user_id', null);
+        return redirect()->route('user.login');
     }
 }

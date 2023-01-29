@@ -12,10 +12,13 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $user_id = $request->session()->get('user_id');
+        $tasks = Task::where('user_id', $user_id)->get();
         return view('task.index', [
-            'tasks' => Task::all()
+            'tasks' => $tasks,
+            'request' => $request,
         ]);
     }
 
@@ -51,6 +54,7 @@ class TaskController extends Controller
 
         $task = New Task;
         $task->title = $validated['title'];
+        $task->user_id = $request->session()->get('user_id');
         $task->start_time = $validated['start_time'];
         $task->end_time = $validated['end_time'];
         $task->is_done = false;
@@ -103,6 +107,11 @@ class TaskController extends Controller
 
         $task = Task::findOrFail($id);
 
+        if ($task->user_id != $request->session()->get('user_id'))
+        {
+            return "Access denied.";
+        }
+
         $task->title = $validated['title'];
         $task->start_time = $validated['start_time'];
         $task->end_time = $validated['end_time'];
@@ -122,6 +131,11 @@ class TaskController extends Controller
     public function done(Request $request, $id)
     {
         $task = Task::findOrFail($id);
+
+        if ($task->user_id != $request->session()->get('user_id'))
+        {
+            return "Access denied.";
+        }
 
         $task->is_done = true;
         $task->save();

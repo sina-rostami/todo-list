@@ -15,17 +15,17 @@ use App\Http\Controllers\TaskController;
 |
 */
 
-Route::get('/signup', function () {
-    return view('user.create');
-});
+Route::get('/', function () { return redirect()->route('task.index'); });
 
-Route::get('/login', function () {
-    return view('login');
-});
+Route::get('/signup', function () { return view('user.create'); });
 
+Route::get('/login', function () { return view('login'); });
 Route::post('/login', [UserController::class, 'login'])->name('user.login');
 
 Route::resource('user', UserController::class);
-Route::resource('task', TaskController::class);
-Route::put('/task/done/{task}', [TaskController::class, 'done'])->name('task.done');
+Route::get('/logout', [UserController::class, 'logout'])->name('user.logout');
 
+Route::group(['middleware' => 'custom'], function() {
+    Route::resource('task', TaskController::class);
+    Route::put('/task/done/{task}', [TaskController::class, 'done'])->name('task.done');
+});
