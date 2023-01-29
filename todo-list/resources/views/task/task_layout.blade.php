@@ -12,11 +12,11 @@
     <nav class="nav navbar  navbar-light bg-light" style="background-color:gray">
     <div class="nav-flex-main" id="navbarText">
         <span class="nav-flex">
-        <a class="navbar-brand" href="#">To do list</a>
+        <div class="navbar-brand" style="margin-right: 30px;">To do list</div>
         <ul class="navbar-nav " style="margin-right:auto">
         <li class="nav-item active"style="display:flex; align-items:center">
-            <a class="nav-link" href="{{ route('task.index') }}">Tasks<span class="sr-only"></a>
-            <a class="nav-link" href="{{ route('task.create') }}"><button class="btn btn-primary">New task</button><span class="sr-only"></a>    
+            <a class="nav-link" href="{{ route('task.index') }}" style="margin-right: 10px;"><button class="btn btn-primary" >Tasks</button><span class="sr-only"></a>
+            <a class="nav-link" href="{{ route('task.create') }}"><button class="btn btn-primary">New task</button><span class="sr-only"></a>
         </li>
         </ul>
         </span>
