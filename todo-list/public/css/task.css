@@ -5,15 +5,56 @@ body {
 
 body {
   align-items: center;
-  padding-top: 40px;
-  padding-bottom: 40px;
   height: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-color: red;
+  background-color:pink;
 }
 
 body .content{
     display: flex;
+    flex-direction: column;
+}
+.logout{
+  margin-right: auto !important;
+}
+.btn-primary {
+  color: #fff;
+  background-color: #dc3545a8;
+  border-color: #084298;
+}
+
+
+.nav {
+  background-color: #555 !important;
+  margin-bottom: 20px;
+  padding: 0 20px;
+}
+
+.nav * {
+  color: white !important;
+}
+
+.content {
+  padding: 0 32px;
+ 
+}
+
+.content > * {
+  width: 100%;
+}
+.nav-flex{
+  display: flex;
+  align-items: center;
+}
+.nav-flex-main{
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+}
+.nav-item > *{
+  margin-right: 8px;
+
 }

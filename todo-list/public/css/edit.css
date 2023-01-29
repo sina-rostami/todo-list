@@ -1,0 +1,13 @@
+.btn-primary {
+  color: #fff;
+  background-color: #dc3545a8;
+  border-color: #084298;
+}
+body {
+  align-items: center;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color:pink;
+}
