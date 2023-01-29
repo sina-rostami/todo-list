@@ -1,0 +1,5 @@
+form .form-error {
+    font-size: .75rem;
+    color: red;
+    font-weight: bold;
+}

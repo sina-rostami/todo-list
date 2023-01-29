@@ -2,6 +2,15 @@
 
 @section('title', 'Login')
 
+@section('message')
+<?php
+if (isset($message))
+{
+    echo "<script>alert(\"" . $message . "\")</script>";
+}
+?>
+@endsection
+
 @section('content')
 <form method="POST" action="{{ route('user.login') }}">
     @csrf
@@ -9,11 +18,11 @@
 
     <div class="form-floating">
         <label for="email">Email Address</label>
-        <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com"/>
+        <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" />
     </div>
     <div class="form-floating">
         <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" name="password" placeholder="Password" />
+        <input type="password" class="form-control" id="password" name="password" value="{{ old('password') }}" />
     </div>
     <div class="form-floating">
         <a href="{{ url('signup') }}">Not a member? Register Now!</a>

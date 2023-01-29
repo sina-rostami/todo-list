@@ -11,9 +11,10 @@
   </head>
   <body class="text-center" style="background-image: url({{ url('assets/background_login.png') }});">
     <main class="form-signin w-100">
-        <div class="form-bg">
-            @yield('content')
-        </div>
+      <div class="form-bg">
+        @yield('content')
+      </div>
     </main>
+    @yield('message')
   </body>
 </html>

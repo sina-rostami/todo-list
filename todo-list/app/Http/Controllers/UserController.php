@@ -45,7 +45,9 @@ class UserController extends Controller
 
         if ($validated['password'] != $validated['confirm-password'])
         {
-            abort(400);
+            return view('login', [
+                'message' => 'Passwords don\'t match',
+            ]);
         }
 
         $user = New User;
@@ -78,7 +80,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view("user.edit", [
+            'user' => User::findOrFail($id)
+        ]);
     }
 
     /**
@@ -90,7 +94,35 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'confirm-password' => 'required',
+        ]);
+
+        if ($validated['password'] != $validated['confirm-password'])
+        {
+            return view('login', [
+                'message' => 'Passwords don\'t match',
+            ]);
+        }
+
+        $user = User::findOrFail($id);
+
+        if ($user->id != $request->session()->get('user_id'))
+        {
+            return view('login', [
+                'message' => 'Access denied',
+            ]);
+        }
+
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
+        $user->password = Crypt::encrypt($validated['password']);
+        $user->save();
+
+        return redirect()->route('user.login');
     }
 
     /**
@@ -111,14 +143,23 @@ class UserController extends Controller
             'password' => 'required',
         ]);
 
-        $user = User::where('email', $validated['email'])->get()[0];
+        $users = User::where('email', $validated['email'])->get();
+        if (!count($users))
+        {
+            return view('login', [
+                'message' => 'Not found',
+            ]);
+        }
+        $user = $users[0];
         if (Crypt::decrypt($user['password']) == $validated['password'])
         {
             $request->session()->put('user_id', strval($user['id']));
             return redirect()->route('task.index');
         }
-        // go to login with an alert
-        return "wrong password";
+            // go to login with an alert
+        return view('login', [
+            'message' => 'Wrong Password',
+        ]);
     }
 
     public function logout(Request $request)
