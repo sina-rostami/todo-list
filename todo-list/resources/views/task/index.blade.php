@@ -23,10 +23,10 @@ if (isset($message))
                 <div class="list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1">{{$task['title']}}</h5>
-                    <small class="text-muted">id: {{$task['id']}}</small>
+                    <small class="text-muted task-id">{{$task['id']}}</small>
                     </div>
                     <p class="mb-1">start_time: {{$task['start_time']}}</p>
-                    <p class="mb-1">end_time: {{$task['end_time']}}</p>
+                    <p class="mb-1 end-time">end_time: {{$task['end_time']}}</p>
                     <small class="text-muted">
                         <form action="{{route('task.done', ['task' => $task['id']])}}", method="POST">
                             @csrf
@@ -46,7 +46,7 @@ if (isset($message))
                 <div class="list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1"><s>{{$task['title']}}</s></h5>
-                    <small class="text-muted">id: {{$task['id']}}</small>
+                    <small class="text-muted">{{$task['id']}}</small>
                     </div>
                     <p class="mb-1">start_time: {{$task['start_time']}}</p>
                     <p class="mb-1">end_time: {{$task['end_time']}}</p>

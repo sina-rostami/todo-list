@@ -9,6 +9,47 @@
     <title>@yield('title')</title>
     @yield('in_head')
 </head>
+<script>
+function get_late_tasks()
+{
+    const current_time = Date.now()
+    const required_delta = 10*60*1000 // 10 minutes in milliseconds
+
+    let tasks_times_tags = [];
+    [].push.apply(tasks_times_tags, document.getElementsByClassName("end-time"));
+
+    let tasks_ids = [];
+    [].push.apply(tasks_ids, document.getElementsByClassName("task-id"));
+
+    let late_tasks = [];
+
+    for (let i = 0; i < tasks_times_tags.length; i++) {
+        if (!tasks_ids[i] || !tasks_times_tags[i])
+            continue;
+
+        const end_time = Date.parse(tasks_times_tags[i].innerHTML.substr(10))
+        const task_id = tasks_ids[i].innerHTML
+
+        if (end_time - current_time <= required_delta)
+            late_tasks.push(task_id)
+    }
+
+    if(!late_tasks.length)
+        return;
+
+    message = "Hurry up for following tasks\n" + late_tasks[0];
+
+    for (let i = 1; i < late_tasks.length; i++)
+        message += ", " + late_tasks[i];
+
+    alert(message)
+}
+
+setInterval(() => {
+    get_late_tasks();
+}, 10000);
+
+</script>
 <body>
     <nav class="nav navbar  navbar-light bg-light" style="background-color:gray">
     <div class="nav-flex-main" id="navbarText">
